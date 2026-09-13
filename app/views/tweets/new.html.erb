@@ -1,0 +1,54 @@
+<div class="post-container">
+  <p class="title">🎺 演奏会の新規投稿</p>
+
+  <%= form_for(@tweet, url: tweets_path) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "団体名・主催" %>
+      <%= f.text_field :name, placeholder: "例：〇〇マンドリンクラブ" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :title, "演奏会名" %>
+      <%= f.text_field :title, placeholder: "例：第〇回 定期演奏会" %>
+    </div>
+
+    <div class="form-group-inline">
+      <div class="form-group-half">
+        <%= f.label :date, "開催日程" %>
+        <%= f.date_field :date %>
+      </div>
+      <div class="form-group-half">
+        <%= f.label :time, "開演時間" %>
+        <%= f.time_field :time %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :place, "開催場所（ホール名等）" %>
+      <%= f.text_field :place, placeholder: "例：市民会館 大ホール" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :access, "アクセス" %>
+      <%= f.text_field :access, placeholder: "例：〇〇駅 徒歩5分" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :price, "入場料・チケット" %>
+      <%= f.text_field :price, placeholder: "例：入場無料（全席自由）" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :program, "曲目・プログラム" %>
+      <%= f.text_area :program, rows: 4, placeholder: "例：1部：マンドリンオーケストラ曲..." %>
+    </div>
+
+    <div class="submit-box">
+      <%= f.submit "演奏会を投稿する" %>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 20px; text-align: center;">
+    <%= link_to "演奏会一覧に戻る", tweets_path, style: "color: #2563eb; text-decoration: none; font-size: 14px;" %>
+  </div>
+</div>

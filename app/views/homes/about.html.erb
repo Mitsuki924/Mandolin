@@ -1,0 +1,61 @@
+<div class="about-container" style="max-width: 800px; margin: 0 auto; padding: 20px 10px;">
+  
+  <!-- 🎺 メイン見出し -->
+  <div style="text-align: center; margin-bottom: 40px;">
+    <h1 style="color: #1e3a8a; font-size: 28px; margin-bottom: 10px;">About "Let's fun Mandolin!"</h1>
+    <p style="color: #64748b; font-size: 15px;">マンドリン音楽を、もっと身近に、もっと楽しく。</p>
+  </div>
+
+  <!-- 🎻 セクション1：マンドリンについて -->
+  <section style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 20px; border-radius: 0 8px 8px 0; margin-bottom: 30px;">
+    <h2 style="color: #1e293b; font-size: 20px; margin-bottom: 10px;">🎵 マンドリンってどんな楽器？</h2>
+    <p style="line-height: 1.8; color: #475569; font-size: 14px;">
+      マンドリンは、イタリア発祥の繊細で煌びやかな音色を持つ撥弦（はつげん）楽器です。<br>
+      ピックを使って細かく弦を弾く「トレモロ奏法」によって、まるで歌声のような美しく感情豊かなメロディーを奏でることができます。<br>
+      独奏はもちろん、マンドラやマンドロンチェロ、ギター、コントラバスと一緒に合奏する「マンドリンオーケストラ」の重厚な響きも大きな魅力です。
+    </p>
+  </section>
+
+  <!-- 🌐 セクション2：このサイトでできること -->
+  <section style="margin-bottom: 40px;">
+    <h2 style="color: #1e293b; font-size: 20px; margin-bottom: 20px; text-align: center;">✨ このサイトでできること</h2>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+      
+      <!-- 特徴1：演奏会情報 -->
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+        <div style="font-size: 32px; margin-bottom: 10px;">📅</div>
+        <h3 style="font-size: 16px; color: #1e3a8a; margin-bottom: 8px;">演奏会情報の共有・検索</h3>
+        <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+          大学や市民団体の定期演奏会情報をカレンダーで一目で確認！気になる演奏会の詳細や曲目もチェックできます。
+        </p>
+      </div>
+
+      <!-- 特徴2：演奏動画 -->
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+        <div style="font-size: 32px; margin-bottom: 10px;">🎬</div>
+        <h3 style="font-size: 16px; color: #ef4444; margin-bottom: 8px;">おすすめ演奏動画の紹介</h3>
+        <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+          YouTubeの演奏動画をおすすめポイントと一緒にシェア。素敵な演奏やお気に入りの曲を見つけられます。
+        </p>
+      </div>
+
+      <!-- 特徴3：つながる -->
+      <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+        <div style="font-size: 32px; margin-bottom: 10px;">🤝</div>
+        <h3 style="font-size: 16px; color: #10b981; margin-bottom: 8px;">演奏者・ファンの交流</h3>
+        <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+          ユーザー登録すれば誰でも演奏会や動画の投稿が可能！マンドリン好き同士の輪を広げましょう。
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 🚀 ボタンエリア -->
+  <div style="text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+    <%= link_to "🏠 ホームへ戻る", root_path, class: "btn-secondary" %>
+    <%= link_to "🎻 演奏会一覧を見る", tweets_path, class: "btn-primary" %>
+  </div>
+
+</div>

@@ -1,0 +1,23 @@
+<h1>演奏会詳細</h1>
+
+<div class="tweet-detail" style="border: 1px solid #ccc; padding: 20px; border-radius: 8px; max-width: 600px;">
+  <h2><%= @tweet.title %></h2>
+  <p><strong>主催・団体名：</strong> <%= @tweet.name %></p>
+  <p><strong>日時：</strong> <%= @tweet.date %> <%= @tweet.time.strftime('%H:%M') if @tweet.time.present? %></p>
+  <p><strong>場所：</strong> <%= @tweet.place %></p>
+  <p><strong>アクセス：</strong> <%= @tweet.access %></p>
+  <p><strong>料金：</strong> <%= @tweet.price %></p>
+  
+  <hr style="margin: 15px 0;">
+  
+  <p><strong>プログラム・曲目：</strong></p>
+  <p><%= simple_format(@tweet.program) %></p>
+</div>
+
+<br>
+<%= link_to "演奏会一覧に戻る", tweets_path %>
+
+<div style="margin-top: 20px;">
+  <%= link_to "編集する", edit_tweet_path(@tweet.id), style: "margin-right: 15px; color: #16a34a; font-weight: bold;" %>
+  <%= link_to "演奏会一覧に戻る", tweets_path %>
+</div>

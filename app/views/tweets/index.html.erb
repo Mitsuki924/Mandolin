@@ -1,0 +1,67 @@
+<h1 class="page-title">マンドリン演奏会</h1>
+
+<div class="action-nav">
+  <%= link_to "新規投稿へ", new_tweet_path, class: "btn-primary" %>
+  <%= link_to "🎬 演奏動画一覧へ移動", movies_path, class: "btn-secondary" %>
+</div>
+
+<!-- 📅 カレンダー表示 -->
+<%= month_calendar(events: @tweets) do |date, tweets| %>
+  <div class="calendar-date"><%= date.day %></div>
+
+  <% tweets.each do |t| %>
+    <div class="calendar-event-pill">
+      <%= t.title.presence || t.name %>
+    </div>
+  <% end %>
+<% end %>
+
+<hr style="margin: 30px 0; border: none; border-top: 1px solid #e2e8f0;">
+
+<div class="tweets-container">
+  <h3>演奏会一覧</h3>
+
+  <% @tweets.each do |t| %>
+    <div class="tweet">
+      <div class="main-box">
+        <!-- 👈 左側：演奏会情報 -->
+        <div class="left-container">
+          <p class="poster">👤 投稿者: <%= t.user.email if t.user.present? %></p>
+          <h4 class="concert-title"><%= t.title.presence || t.name %></h4>
+          <p class="concert-info"><strong>団体名：</strong><%= t.name %></p>
+          <p class="concert-info"><strong>日時：</strong><%= t.date %> <%= t.time.strftime('%H:%M') if t.time.present? %></p>
+          <p class="concert-info"><strong>場所：</strong><%= t.place %></p>
+          <p class="concert-info"><strong>曲目：</strong><%= t.program %></p>
+          <p class="concert-info"><strong>料金：</strong><%= t.price %></p>
+          <p class="concert-info"><strong>アクセス：</strong><%= t.access %></p>
+
+          <!-- 💖 ここが「気になる！」ボタンエリア！ -->
+          <div style="margin-top: 12px; display: flex; align-items: center; gap: 8px;">
+            <% if user_signed_in? %>
+              <% if current_user.already_liked?(t) %>
+                <%= button_to tweet_likes_path(t), method: :delete, style: "background: #fee2e2; border: 1px solid #fca5a5; color: #ef4444; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center;" do %>
+                  ❤️ 気になる！済 (<%= t.likes.count %>)
+                <% end %>
+              <% else %>
+                <%= button_to tweet_likes_path(t), method: :post, style: "background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; padding: 5px 12px; border-radius: 20px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center;" do %>
+                  🤍 気になる！ (<%= t.likes.count %>)
+                <% end %>
+              <% end %>
+            <% else %>
+              <span style="font-size: 13px; color: #94a3b8;">❤️ 気になる！: <%= t.likes.count %>件</span>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- 👉 右側：ボタンエリア -->
+        <div class="right-container">
+          <%= link_to "詳細", tweet_path(t.id), class: "btn-action btn-show" %>
+          <%= link_to "編集", edit_tweet_path(t.id), class: "btn-action btn-edit" %>
+          <%= button_to "削除", tweet_path(t.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn-action btn-delete" %>
+        </div>
+      </div>
+
+      <p class="time">投稿日時: <%= t.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    </div>
+  <% end %>
+</div>

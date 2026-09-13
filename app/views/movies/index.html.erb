@@ -1,0 +1,48 @@
+<h1 class="page-title">演奏動画一覧</h1>
+
+<div class="action-nav">
+  <%= link_to "動画を新規投稿", new_movie_path, class: "btn-primary" %>
+  <%= link_to "🎻 演奏会一覧へ戻る", tweets_path, class: "btn-secondary" %>
+</div>
+
+<div class="movies-container">
+  <h3>おすすめ動画一覧</h3>
+
+  <% @movies.each do |m| %>
+    <div class="movie-card">
+      <div class="movie-main-box">
+        <!-- 👈 左側：YouTube動画プレイヤー -->
+        <div class="movie-player-container">
+          <% if m.link.present? && find_youtube_url(m.link).present? %>
+            <iframe width="100%" height="180" 
+                    src="https://www.youtube.com/embed/<%= find_youtube_url(m.link) %>" 
+                    frameborder="0" allowfullscreen style="border-radius: 6px;">
+            </iframe>
+          <% else %>
+            <div class="no-video-box">動画がありません</div>
+          <% end %>
+        </div>
+
+        <!-- 👉 右側：動画情報と操作ボタン -->
+        <div class="movie-info-container">
+          <p class="poster">👤 投稿者: <%= m.user.email if m.user.present? %></p>
+          <h4 class="movie-title"><%= m.movietitle %></h4>
+          
+          <div class="movie-point-box">
+            <strong>見どころ・ポイント：</strong>
+            <p><%= simple_format(truncate(m.point, length: 80)) %></p>
+          </div>
+
+          <div class="movie-actions">
+            <%= link_to "詳細", movie_path(m.id), class: "btn-action btn-show" %>
+            <%= link_to "編集", edit_movie_path(m.id), class: "btn-action btn-edit" %>
+            <%= button_to "削除", movie_path(m.id), method: :delete, data: { turbo_confirm: "本当にこの動画を削除しますか？" }, class: "btn-action btn-delete" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🕒 投稿日時（右寄せ） -->
+      <p class="time">投稿日時: <%= m.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    </div>
+  <% end %>
+</div>

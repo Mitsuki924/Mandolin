@@ -1,0 +1,51 @@
+<h1>演奏会の編集</h1>
+
+<%= form_for @tweet do |f| %>
+  <div class="field">
+    <%= f.label :name, "団体名" %>
+    <%= f.text_field :name, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title, "演奏会名" %>
+    <%= f.text_field :title, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date, "日程" %>
+    <%= f.date_field :date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time, "開演時間" %>
+    <%= f.time_field :time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :place, "開催場所" %>
+    <%= f.text_field :place, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :access, "アクセス" %>
+    <%= f.text_field :access, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price, "入場料" %>
+    <%= f.text_field :price, size: 20 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :program, "曲目・プログラム" %>
+    <%= f.text_area :program, size: "40x5" %>
+  </div>
+
+  <div style="margin-top: 15px;">
+    <%= f.submit "変更を更新する" %>
+  </div>
+<% end %>
+
+<br>
+<%= link_to "詳細に戻る", tweet_path(@tweet.id) %> | 
+<%= link_to "一覧に戻る", tweets_path %>

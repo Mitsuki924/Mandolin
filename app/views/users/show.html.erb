@@ -1,0 +1,98 @@
+<div class="mypage-container" style="max-width: 800px; margin: 0 auto;">
+  <!-- 👤 ユーザープロフヘッダー -->
+  <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px;">
+    <div style="font-size: 48px;">👤</div>
+    <div>
+      <h2 style="color: #1e3a8a; margin-bottom: 5px;">マイページ</h2>
+      <p style="color: #475569; font-size: 14px;"><strong>アカウント：</strong><%= @user.email %></p>
+      <p style="color: #64748b; font-size: 13px;">登録日：<%= @user.created_at.strftime('%Y年%m月%d日') %></p>
+    </div>
+  </div>
+
+  <!-- 🎻 投稿した演奏会一覧セクション -->
+  <section style="margin-bottom: 40px;">
+    <h3 style="border-bottom: 2px solid #00acee; padding-bottom: 8px; color: #1e293b; margin-bottom: 15px;">
+      🎺 投稿した演奏会（<%= @tweets.count %>件）
+    </h3>
+
+    <% if @tweets.present? %>
+      <div class="tweets-container" style="width: 100%;">
+        <% @tweets.each do |t| %>
+          <div class="tweet" style="margin-bottom: 15px;">
+            <div class="main-box">
+              <div class="left-container">
+                <h4 class="concert-title"><%= t.title.presence || t.name %></h4>
+                <p class="concert-info"><strong>日時：</strong><%= t.date %> <%= t.time.strftime('%H:%M') if t.time.present? %></p>
+                <p class="concert-info"><strong>場所：</strong><%= t.place %></p>
+              </div>
+
+              <!-- 右側：操作ボタン -->
+              <div class="right-container">
+                <%= link_to "詳細", tweet_path(t.id), class: "btn-action btn-show" %>
+                <%= link_to "編集", edit_tweet_path(t.id), class: "btn-action btn-edit" %>
+                <%= button_to "削除", tweet_path(t.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn-action btn-delete" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p style="color: #94a3b8; font-size: 14px;">まだ投稿した演奏会はありません。</p>
+    <% end %>
+  </section>
+
+  <!-- 🎬 投稿した動画一覧セクション -->
+  <section style="margin-bottom: 40px;">
+    <h3 style="border-bottom: 2px solid #ef4444; padding-bottom: 8px; color: #1e293b; margin-bottom: 15px;">
+      🎬 投稿したおすすめ演奏動画（<%= @movies.count %>件）
+    </h3>
+
+    <% if @movies.present? %>
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <% @movies.each do |m| %>
+          <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; display: flex; gap: 15px; align-items: center; justify-content: space-between;">
+            <div>
+              <h4 style="color: #1e293b; margin-bottom: 6px;"><%= m.movietitle %></h4>
+              <p style="color: #64748b; font-size: 13px;"><%= truncate(m.point, length: 50) %></p>
+            </div>
+
+            <div style="display: flex; gap: 8px; min-width: 140px; justify-content: flex-end;">
+              <%= link_to "詳細", movie_path(m.id), class: "btn-action btn-show" %>
+              <%= link_to "編集", edit_movie_path(m.id), class: "btn-action btn-edit" %>
+              <%= button_to "削除", movie_path(m.id), method: :delete, data: { turbo_confirm: "本当に削除しますか？" }, class: "btn-action btn-delete" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p style="color: #94a3b8; font-size: 14px;">まだ投稿した動画はありません。</p>
+    <% end %>
+  </section>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <%= link_to "ホームへ戻る", root_path, style: "color: #2563eb; text-decoration: none;" %>
+  </div>
+</div>
+
+<!-- 💖 気になる！した演奏会一覧セクション -->
+  <section style="margin-bottom: 40px;">
+    <h3 style="border-bottom: 2px solid #ec4899; padding-bottom: 8px; color: #1e293b; margin-bottom: 15px;">
+      💖 気になる！した演奏会（<%= @liked_tweets.count %>件）
+    </h3>
+
+    <% if @liked_tweets.present? %>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <% @liked_tweets.each do |t| %>
+          <div style="border: 1px solid #fbcfe8; background: #fffdfd; border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h4 style="color: #9d174d; margin-bottom: 4px;"><%= t.title.presence || t.name %></h4>
+              <p style="font-size: 13px; color: #64748b;">📅 日時：<%= t.date %> / 📍 場所：<%= t.place %></p>
+            </div>
+            <%= link_to "詳細を見る", tweet_path(t.id), class: "btn-action btn-show" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p style="color: #94a3b8; font-size: 14px;">まだ「気になる！」した演奏会はありません。</p>
+    <% end %>
+  </section>

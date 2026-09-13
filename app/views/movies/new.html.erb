@@ -1,0 +1,23 @@
+<h1>おすすめ動画の新規投稿</h1>
+
+<%= form_for @movie do |f| %>
+  <div class="field">
+    <%= f.label :movietitle, "動画タイトル" %>
+    <%= f.text_field :movietitle, size: 30 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :link, "動画リンク (URL)" %>
+    <%= f.text_area :link, size: "30x2" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :point, "おすすめポイント" %>
+    <%= f.text_area :point, size: "30x4" %>
+  </div>
+
+  <%= f.submit "動画を投稿する" %>
+<% end %>
+
+<br>
+<%= link_to "トップに戻る", root_path %>

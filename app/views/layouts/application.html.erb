@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MandolinApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!-- 🎻 共通ヘッダー -->
+    <header>
+      <h1><%= link_to "Let's fun Mandolin!", root_path %></h1>
+      <div class="header-list">
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "About", about_path %></li>
+          <li><%= link_to "演奏会一覧", tweets_path %></li>
+          <li><%= link_to "演奏動画一覧", movies_path %></li>
+          
+          <!-- 🔐 ログイン状態の分岐 -->
+          <% if user_signed_in? %>
+            <li><%= link_to "マイページ", user_path(current_user.id), style: "color: #facc15; font-weight: bold;" %></li>
+            <li><%= button_to "ログアウト", destroy_user_session_path, method: :delete, style: "background: none; border: 1px solid white; color: white; padding: 4px 8px; border-radius: 4px; cursor: pointer;" %></li>
+          <% else %>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+
+    <!-- 📱 メインコンテンツ表示エリア -->
+    <main class="main-container">
+      <%= yield %>
+    </main>
+
+    <!-- 📜 共通フッター -->
+    <footer>
+      <p>&copy; 2026 Let's fun Mandolin! All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

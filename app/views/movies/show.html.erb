@@ -1,0 +1,23 @@
+<h1>演奏動画詳細</h1>
+
+<div class="movie-detail" style="max-width: 600px; margin: 20px 0;">
+  <h2><%= @movie.movietitle %></h2>
+
+  <% if @movie.link.present? && find_youtube_url(@movie.link).present? %>
+    <div style="margin: 20px 0;">
+      <iframe width="100%" height="360" 
+              src="https://www.youtube.com/embed/<%= find_youtube_url(@movie.link) %>" 
+              frameborder="0" allowfullscreen>
+      </iframe>
+    </div>
+  <% end %>
+
+  <div style="background: #f9fafb; padding: 15px; border-radius: 8px;">
+    <h3>おすすめポイント・見どころ</h3>
+    <p><%= simple_format(@movie.point) %></p>
+  </div>
+</div>
+
+<br>
+<%= link_to "編集する", edit_movie_path(@movie.id), style: "color: #16a34a; font-weight: bold; text-decoration: none;" %>
+<%= link_to "動画一覧に戻る", movies_path %>
